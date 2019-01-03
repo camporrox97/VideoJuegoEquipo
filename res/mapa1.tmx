@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="20" tilewidth="32" tileheight="32" nextobjectid="4">
+ <tileset firstgid="1" name="tiles32" tilewidth="32" tileheight="32" tilecount="98" columns="14">
+  <image source="tiles32.png" width="448" height="224"/>
+ </tileset>
+ <layer name="PatronesFondo" width="10" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwzZ2BgMB/Fo3gUY8UAgH0q+Q==
+  </data>
+ </layer>
+ <layer name="PatronesTerreno" width="10" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzzYiAMvKB4VN2oupGmDgAsTguR
+  </data>
+ </layer>
+ <objectgroup name="Suelos">
+  <object id="1" x="297" y="1">
+   <polyline points="0,0 -1,638 14,638 15,0"/>
+  </object>
+  <object id="3" x="21" y="0">
+   <polyline points="0,0 2,638 -11,639 -13,1 0,1"/>
+  </object>
+ </objectgroup>
+</map>
