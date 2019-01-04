@@ -4,7 +4,8 @@ var res = {
     CloseSelected_png : "res/CloseSelected.png",
     serpiente : "res/bola.png",
     tiles32_png: "res/tiles32.png",
-    mapa1_tmx: "res/mapa1.tmx"
+    mapa1_tmx: "res/mapa1.tmx",
+    jugador_avanzando_plist : "res/jugador_avanzando.plist"
 };
 
 var g_resources = [];

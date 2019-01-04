@@ -1,5 +1,7 @@
 var controles = {};
 var teclas = [];
+var idCapaJuego = 1;
+var idCapaControles = 2;
 
 var GameLayer = cc.Layer.extend({
     sprite: null,
@@ -11,112 +13,22 @@ var GameLayer = cc.Layer.extend({
         this._super();
         var size = cc.winSize;
 
-        this.jugador = new Jugador(this, cc.p(50,150));
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            onKeyPressed: this.procesarKeyPressed.bind(this),
-            onKeyReleased: this.procesarKeyReleased.bind(this)
-        }, this)
+        // CACHE
+        cc.spriteFrameCache.addSpriteFrames(res.jugador_avanzando_plist);
+
+        this.space = new cp.Space();
+
+
+        this.jugador = new Jugador(this, cc.p(50,50));
+
 
         this.cargarMapa();
         this.scheduleUpdate();
         return true;
     },
 
-    procesarControles() {
-        if (controles.moverX > 0) {
-            this.spriteSerpiente.velocidadX = 5;
-        }
-        if (controles.moverX < 0) {
-            this.spriteSerpiente.velocidadX = -5;
-        }
-        if (controles.moverX == 0) {
-            this.spriteSerpiente.velocidadX = 0;
-        }
-        if (controles.moverY > 0) {
-            this.spriteSerpiente.velocidadY = 5;
-        }
-        if (controles.moverY < 0) {
-            this.spriteSerpiente.velocidadY = -5;
-        }
-        if (controles.moverY == 0) {
-            this.spriteSerpiente.velocidadY = 0;
-        }
-
-    },
-    procesarKeyPressed(keyCode) {
-        console.log("procesarKeyPressed " + keyCode);
-        var posicion = teclas.indexOf(keyCode);
-        if (posicion == -1) {
-            teclas.push(keyCode);
-            switch (keyCode) {
-                case 38:
-                    console.log("controles.moverY = 1");
-                    controles.moverY = 1;
-                    break;
-                case 40:
-                    controles.moverY = -1;
-                    break;
-                case 39:
-                    // ir derecha
-                    console.log("controles.moverX = 1");
-                    controles.moverX = 1;
-                    break;
-                case 37:
-                    // ir izquierda
-                    controles.moverX = -1;
-                    break;
-            }
-        }
-    },
-    procesarKeyReleased(keyCode) {
-        console.log("procesarKeyReleased " + keyCode);
-        var posicion = teclas.indexOf(keyCode);
-        teclas.splice(posicion, 1);
-        switch (keyCode) {
-            case 38:
-                if (controles.moverY == 1) {
-                    controles.moverY = 0;
-                }
-                break;
-            case 40:
-                if (controles.moverY == -1) {
-                    controles.moverY = 0;
-                }
-                break;
-
-            case 39:
-                if (controles.moverX == 1) {
-                    controles.moverX = 0;
-                }
-                break;
-            case 37:
-                if (controles.moverX == -1) {
-                    controles.moverX = 0;
-                }
-                break;
-        }
-
-
-    }, procesarMouseDown: function (event) {
-        // Ambito procesarMouseDown
-        var instancia = event.getCurrentTarget();
-
-        var actionMoverBarraX =
-            cc.MoveTo.create(Math.abs(instancia.spriteSerpiente.x - event.getLocationX()) / 500,
-                cc.p(event.getLocationX(),
-                    cc.winSize.height * 0.1));
-
-
-        cc.director.getActionManager().removeAllActionsFromTarget(instancia.spriteSerpiente, true);
-
-        instancia.spriteSerpiente.runAction(actionMoverBarraX);
-
-
-    },
-
     update: function (dt) {
-        this.procesarControles();
+        this.space.step(dt);
 
     }
     ,
@@ -144,8 +56,11 @@ var GameLayer = cc.Layer.extend({
 var GameScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
-        var layer = new GameLayer();
-        this.addChild(layer);
+        var gamelayer = new GameLayer();
+        this.addChild(gamelayer,0,idCapaJuego);
+
+        var controleslayer = new ControlesLayer();
+        this.addChild(controleslayer,0,idCapaControles);
     }
 });
 
