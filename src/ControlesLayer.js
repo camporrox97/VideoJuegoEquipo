@@ -16,67 +16,33 @@ var ControlesLayer = cc.Layer.extend({
             var jugador = this.getParent().getChildByTag(idCapaJuego).jugador;
 
             if (controles.moverX > 0) {
-                    jugador.body.vx = 5;
+                    jugador.body.vx = 100;
             }
             if (controles.moverX < 0) {
-                  jugador.body.vx = -5;
+                  jugador.body.vx = -100;
             }
             if (controles.moverX == 0) {
                   jugador.body.vx = 0;
              }
-            if (controles.moverY > 0) {
-                    jugador.vy = 5;
-             }
-            if (controles.moverY < 0) {
-                  jugador.vy = -5;
-            }
-            if (controles.moverY == 0) {
-                  jugador.vy = 0;
-             }
-             jugador.body.applyImpulse(cp.v(300, 0), cp.v(0, 0));
-
         },
         procesarKeyPressed:function (keyCode) {
-            console.log("procesarKeyPressed " + keyCode);
             var posicion = teclas.indexOf(keyCode);
             if (posicion == -1) {
                 teclas.push(keyCode);
                 switch (keyCode) {
-                    case 38:
-                        console.log("controles.moverY = 1");
-                        controles.moverY = 1;
-                        break;
-                    case 40:
-                        controles.moverY = -1;
-                        break;
                     case 39:
-                        // ir derecha
-                        console.log("controles.moverX = 1");
                         controles.moverX = 1;
                         break;
                     case 37:
-                        // ir izquierda
                         controles.moverX = -1;
                         break;
                 }
             }
         },
         procesarKeyReleased:function (keyCode) {
-            console.log("procesarKeyReleased " + keyCode);
             var posicion = teclas.indexOf(keyCode);
             teclas.splice(posicion, 1);
             switch (keyCode) {
-                case 38:
-                    if (controles.moverY == 1) {
-                        controles.moverY = 0;
-                    }
-                    break;
-                case 40:
-                    if (controles.moverY == -1) {
-                        controles.moverY = 0;
-                    }
-                    break;
-
                 case 39:
                     if (controles.moverX == 1) {
                         controles.moverX = 0;
@@ -88,8 +54,6 @@ var ControlesLayer = cc.Layer.extend({
                     }
                     break;
             }
-
-
         },
 
     update:function (dt) {

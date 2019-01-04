@@ -5,7 +5,9 @@ var res = {
     serpiente : "res/bola.png",
     tiles32_png: "res/tiles32.png",
     mapa1_tmx: "res/mapa1.tmx",
-    jugador_avanzando_plist : "res/jugador_avanzando.plist"
+    jugador_avanzando_plist : "res/jugador_avanzando.plist",
+    moneda_plist: "res/moneda.plist",
+    cocodrilo_plist : "animacioncocodrilo.plist"
 };
 
 var g_resources = [];

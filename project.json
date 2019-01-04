@@ -14,6 +14,8 @@
         "src/resource.js",
         "src/app.js",
         "src/Jugador.js",
-        "src/ControlesLayer.js"
+        "src/ControlesLayer.js",
+        "src/Moneda.js",
+        "src/Bloque.js"
     ]
 }
