@@ -7,7 +7,7 @@ var res = {
     mapa1_tmx: "res/mapa1.tmx",
     jugador_avanzando_plist : "res/jugador_avanzando.plist",
     moneda_plist: "res/moneda.plist",
-    cocodrilo_plist : "animacioncocodrilo.plist"
+    bloque_plist : "res/bloques.plist"
 };
 
 var g_resources = [];

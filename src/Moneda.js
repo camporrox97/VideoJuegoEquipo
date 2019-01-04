@@ -14,11 +14,11 @@ ctor:function (gameLayer, posicion) {
     // Los cuerpos estáticos nunca se añaden al Space
 
     // Crear forma circular 
-    var radio = 20; //this.sprite.getContentSize().width / 2;
+    var radio = 20;//this.sprite.getContentSize().width / 2;
     this.shape = new cp.CircleShape(body, radio , cp.vzero);
     this.shape.setCollisionType(tipoMoneda);
     // Nunca setSensor(true) no genera choques es como un “fantasma”
-    this.shape.setSensor(true);
+    this.shape.setSensor(false);
     // Añadir forma estática al Space
     gameLayer.space.addStaticShape(this.shape);
     // Añadir sprite a la capa

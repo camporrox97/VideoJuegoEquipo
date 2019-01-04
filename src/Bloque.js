@@ -6,16 +6,14 @@ ctor:function (gameLayer, posicion) {
     this.gameLayer = gameLayer;
 
     // Crear Sprite
-    this.sprite = new cc.PhysicsSprite("#cocodrilo1.png");
+    this.sprite = new cc.PhysicsSprite("#bloque1.png");
     // Cuerpo estatico, no le afectan las fuerzas, gravedad, etc.
     var body = new cp.StaticBody();
     body.setPos(posicion);
     this.sprite.setBody(body);
     // Los cuerpos estáticos nunca se añaden al Space
 
-    // Crear forma circular
-    var radio = 20; //this.sprite.getContentSize().width / 2;
-    this.shape = new cp.BoxShape(body, 0.1);
+    this.shape = new cp.CircleShape(body, 20 , cp.vzero);
     this.shape.setCollisionType(tipoBloque);
     // Añadir forma estática al Space
     gameLayer.space.addStaticShape(this.shape);
@@ -24,8 +22,8 @@ ctor:function (gameLayer, posicion) {
 
     // Crear animación
     var framesAnimacion = [];
-    for (var i = 1; i <= 6; i++) {
-        var str = "cocodrilo" + i + ".png";
+    for (var i = 1; i <= 3; i++) {
+        var str = "bloque" + i + ".png";
         var frame = cc.spriteFrameCache.getSpriteFrame(str);
         framesAnimacion.push(frame);
     }

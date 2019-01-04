@@ -23,12 +23,13 @@ var GameLayer = cc.Layer.extend({
         // CACHE
         cc.spriteFrameCache.addSpriteFrames(res.jugador_avanzando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.moneda_plist);
-        cc.spriteFrameCache.addSpriteFrames(res.cocodrilo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.bloque_plist);
 
         this.space = new cp.Space();
+        this.cargarMapa();
         this.jugador = new Jugador(this, cc.p(150,50));
 
-        this.cargarMapa();
+
         this.scheduleUpdate();
         this.space.addCollisionHandler(tipoSuelo, tipoJugador, null, null, this.collisionSueloConJugador.bind(this), null);
         this.space.addCollisionHandler(tipoJugador, tipoMoneda, null, this.collisionJugadorConMoneda.bind(this), null, null);
@@ -38,16 +39,15 @@ var GameLayer = cc.Layer.extend({
     collisionSueloConJugador:function (arbiter, space) {
         this.jugador.body.vx = 0;
         this.jugador.body.applyImpulse(cp.v(50,0), cp.v(0, 0));
-        console.log("EEY")
     },
     collisionJugadorConMoneda:function (arbiter, space) {
-        console.log("CHOCA")
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[1]);
     },
 
     collisionJugadorConBloque:function (arbiter, space) {
-        this.jugador.body.applyImpulse(cp.v(0,-100), cp.v(0, -100));
+        console.log("pasamos")
+        this.jugador.body.p.y = this.jugador.body.p.y - 1;
     },
 
     update: function (dt) {
@@ -65,6 +65,12 @@ var GameLayer = cc.Layer.extend({
                       this.monedas.splice(i, 1);
                   }
                 }
+                for (var i = 0; i < this.bloques.length; i++) {
+                    if (this.bloques[i].shape == shape) {
+                        this.bloques[i].eliminar();
+                        this.bloques.splice(i, 1);
+                        }
+                   }
             }
             this.formasEliminar = [];
     }
@@ -97,13 +103,13 @@ var GameLayer = cc.Layer.extend({
         }
 
         var grupoBloques = this.mapa.getObjectGroup("Bloques");
-                var bloquesArray = grupoBloques.getObjects();
+        var bloquesArray = grupoBloques.getObjects();
+
                 for (var i = 0; i < bloquesArray.length; i++) {
                     var bloque = new Bloque(this, cc.p(bloquesArray[i]["x"], bloquesArray[i]["y"]));
                     this.bloques.push(bloque);
                 }
-        }
-    });
+    }});
 
 var GameScene = cc.Scene.extend({
     onEnter: function () {
