@@ -1,7 +1,17 @@
 var ControlesLayer = cc.Layer.extend({
+    etiquetaMonedas:null,
+    monedas:0,
     ctor:function () {
         this._super();
         var size = cc.winSize;
+
+
+
+    // Contador Monedas
+        this.etiquetaMonedas = new cc.LabelTTF("Monedas: 0", "Helvetica", 20);
+        this.etiquetaMonedas.setPosition(cc.p(150, 30));
+        this.etiquetaMonedas.fillStyle = new cc.Color(0, 0, 0, 0);
+        this.addChild(this.etiquetaMonedas);
 
         cc.eventManager.addListener({
               event: cc.EventListener.KEYBOARD,
@@ -12,6 +22,9 @@ var ControlesLayer = cc.Layer.extend({
         this.scheduleUpdate();
         return true;
     },
+
+
+
     procesarControles:function () {
             var jugador = this.getParent().getChildByTag(idCapaJuego).jugador;
 
@@ -55,6 +68,13 @@ var ControlesLayer = cc.Layer.extend({
                     break;
             }
         },
+
+
+    agregarMoneda:function(){
+        this.monedas++;
+        this.etiquetaMonedas.setString("Monedas: " + this.monedas);
+    },
+
 
     update:function (dt) {
         this.procesarControles(this);

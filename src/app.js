@@ -20,6 +20,11 @@ var GameLayer = cc.Layer.extend({
     ctor: function () {
         this._super();
         var size = cc.winSize;
+
+
+
+
+
         // CACHE
         cc.spriteFrameCache.addSpriteFrames(res.jugador_avanzando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.moneda_plist);
@@ -35,6 +40,11 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoJugador, tipoMoneda, null, this.collisionJugadorConMoneda.bind(this), null, null);
         this.space.addCollisionHandler(tipoJugador, tipoBloque, null, this.collisionJugadorConBloque.bind(this), null, null);
         return true;
+
+
+
+
+
     },
     collisionSueloConJugador:function (arbiter, space) {
         this.jugador.body.vx = 0;
@@ -43,6 +53,9 @@ var GameLayer = cc.Layer.extend({
     collisionJugadorConMoneda:function (arbiter, space) {
         var shapes = arbiter.getShapes();
         this.formasEliminar.push(shapes[1]);
+        var capaControles =
+            this.getParent().getChildByTag(idCapaControles);
+        capaControles.agregarMoneda();
     },
 
     collisionJugadorConBloque:function (arbiter, space) {
