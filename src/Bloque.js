@@ -2,11 +2,21 @@ var Bloque = cc.Class.extend({
     gameLayer:null,
     sprite:null,
     shape:null,
+    lifes:0,
+    etiquetaLifes: null,
 ctor:function (gameLayer, posicion) {
     this.gameLayer = gameLayer;
 
+    this.lifes = Math.floor(Math.random() * 10);
+    this.etiquetaLifes = new cc.LabelTTF(("" + this.lifes), "Helvetica", 20);
+    this.etiquetaLifes.setPosition(cc.p(20,20));
+    this.etiquetaLifes.fillStyle = new cc.Color(0, 255, 0, 0);
+    this.gameLayer.etiquetasBloques.push(this.etiquetaLifes);
+
+
     // Crear Sprite
     this.sprite = new cc.PhysicsSprite("#bloque1.png");
+    this.sprite.addChild(this.etiquetaLifes);
     // Cuerpo estatico, no le afectan las fuerzas, gravedad, etc.
     var body = new cp.StaticBody();
     body.setPos(posicion);
@@ -15,6 +25,7 @@ ctor:function (gameLayer, posicion) {
 
     this.shape = new cp.CircleShape(body, 20 , cp.vzero);
     this.shape.setCollisionType(tipoBloque);
+    this.shape.bloque = this;
     // Añadir forma estática al Space
     gameLayer.space.addStaticShape(this.shape);
     // Añadir sprite a la capa
@@ -33,6 +44,10 @@ ctor:function (gameLayer, posicion) {
     // ejecutar la animación
     this.sprite.runAction(actionAnimacionBucle);
 },
+actualizar: function() {
+    console.log("pasa x actualizar de bloque");
+    this.etiquetaLifes.setString("" + this.lifes);
+},
 eliminar: function (){
     // quita la forma
     this.gameLayer.space.removeShape(this.shape);
@@ -43,6 +58,10 @@ eliminar: function (){
 
     // quita el sprite
     this.gameLayer.removeChild(this.sprite);
+},
+impactado : function() {
+    console.log("impactado");
+    this.lifes--;
 }
 
 

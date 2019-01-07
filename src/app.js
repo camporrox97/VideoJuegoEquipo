@@ -7,6 +7,7 @@ var tipoSuelo = 1;
 var tipoJugador = 2;
 var tipoMoneda = 3;
 var tipoBloque = 4;
+var tipoPowerup = 5;
 
 var GameLayer = cc.Layer.extend({
     sprite: null,
@@ -15,8 +16,10 @@ var GameLayer = cc.Layer.extend({
     mapa: null,
     mapaAncho: null,
     monedas : [],
+    powerups : [],
     bloques: [] ,
     formasEliminar: [],
+    etiquetasBloques : [],
     ctor: function () {
         this._super();
         var size = cc.winSize;
@@ -29,6 +32,8 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.jugador_avanzando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.moneda_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bloque_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.animacionpanda_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.animaciontigre_plist);
 
         this.space = new cp.Space();
         this.cargarMapa();
@@ -39,6 +44,7 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoSuelo, tipoJugador, null, null, this.collisionSueloConJugador.bind(this), null);
         this.space.addCollisionHandler(tipoJugador, tipoMoneda, null, this.collisionJugadorConMoneda.bind(this), null, null);
         this.space.addCollisionHandler(tipoJugador, tipoBloque, null, this.collisionJugadorConBloque.bind(this), null, null);
+        this.space.addCollisionHandler(tipoJugador, tipoPowerup, null, this.collisionJugadorConPowerup.bind(this), null, null);
         return true;
 
 
@@ -59,15 +65,34 @@ var GameLayer = cc.Layer.extend({
     },
 
     collisionJugadorConBloque:function (arbiter, space) {
-        console.log("pasamos")
-        this.jugador.body.p.y = this.jugador.body.p.y - 1;
+        var capaControles = this.getParent().getChildByTag(idCapaControles);
+        var bloque = arbiter.getShapes()[1].bloque;
+        bloque.impactado();
+        this.jugador.impactado();
+        this.jugador.body.p.y = this.jugador.body.p.y - 5;
+        if (bloque.lifes <= 0) this.formasEliminar.push(bloque.shape);
+        if (this.jugador.monedas <=0) this.gameOver();
+    },
+
+    collisionJugadorConPowerup:function (arbiter, space) {
+        var shapePowerup = arbiter.getShapes()[1];
+        var powerup = shapePowerup.powerup;
+        powerup.doThing(this.jugador);
+        this.formasEliminar.push(shapePowerup);
+    },
+    gameOver : function() {
+        // HACER GAME OVER
     },
 
     update: function (dt) {
         this.space.step(dt);
-
+        this.jugador.update();
         var posicionYJugador = this.jugador.body.p.y - 100;
         this.setPosition(cc.p( 0,-posicionYJugador));
+
+                    for(var i = 0; i < this.bloques.length; i++) {
+                        this.bloques[i].actualizar();
+                    }
 
         for(var i = 0; i < this.formasEliminar.length; i++) {
                 var shape = this.formasEliminar[i];
@@ -84,6 +109,12 @@ var GameLayer = cc.Layer.extend({
                         this.bloques.splice(i, 1);
                         }
                    }
+                for (var i = 0; i < this.powerups.length; i++) {
+                                    if (this.powerups[i].shape == shape) {
+                                        this.powerups[i].eliminar();
+                                        this.powerups.splice(i, 1);
+                                        }
+                                   }
             }
             this.formasEliminar = [];
     }
@@ -122,6 +153,19 @@ var GameLayer = cc.Layer.extend({
                     var bloque = new Bloque(this, cc.p(bloquesArray[i]["x"], bloquesArray[i]["y"]));
                     this.bloques.push(bloque);
                 }
+
+         var grupoPowerups = this.mapa.getObjectGroup("Powerups");
+         var powerupsArray = grupoPowerups.getObjects();
+
+         for (var i = 0; i < powerupsArray.length; i++) {
+            var powerup = null;
+            if (Boolean(Math.round(Math.random()))) {
+                powerup = new PowerupEstrella(this, cc.p(powerupsArray[i]["x"], powerupsArray[i]["y"]));
+            } else {
+                powerup = new PowerupDoble(this, cc.p(powerupsArray[i]["x"], powerupsArray[i]["y"]));
+            }
+            this.powerups.push(powerup);
+         }
     }});
 
 var GameScene = cc.Scene.extend({

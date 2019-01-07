@@ -17,6 +17,7 @@
         "src/ControlesLayer.js",
         "src/Moneda.js",
         "src/Bloque.js",
-        "src/fondo.js"
+        "src/fondo.js",
+        "src/powerups.js"
     ]
 }

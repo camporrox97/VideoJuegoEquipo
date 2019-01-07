@@ -1,35 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="20" tilewidth="32" tileheight="32" nextobjectid="19">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="200" tilewidth="32" tileheight="32" nextobjectid="43">
  <tileset firstgid="1" name="tiles32" tilewidth="32" tileheight="32" tilecount="98" columns="14">
   <image source="tiles32.png" width="448" height="224"/>
  </tileset>
- <layer name="PatronesFondo" width="10" height="20">
+ <layer name="PatronesFondo" width="10" height="200">
   <data encoding="base64" compression="zlib">
-   eJwzZ2BgMB/Fo3gUY8UAgH0q+Q==
+   eJztwwENAAAMw6C6mn9nF3JIWDVVVVVVVVVVff4A4kKtwA==
   </data>
  </layer>
- <layer name="PatronesTerreno" width="10" height="20">
+ <layer name="PatronesTerreno" width="10" height="200">
   <data encoding="base64" compression="zlib">
-   eJzzYiAMvKB4VN2oupGmDgAsTguR
+   eJztyrENAAAIwzDu6/8HsXRnR46UzZm7dI7jOI7jOI7jOI7jOI7jOI7jOI7jOI776hYUcHOh
   </data>
  </layer>
  <objectgroup name="Suelos">
-  <object id="1" x="297" y="1">
-   <polyline points="0,0 -1,638 14,638 15,0"/>
+  <object id="1" x="296" y="0">
+   <polyline points="0,0 0,6399 14,6398 14,0 1,1"/>
   </object>
-  <object id="3" x="21" y="0">
-   <polyline points="0,0 2,638 -11,639 -13,1 0,1"/>
+  <object id="4" x="23" y="1">
+   <polyline points="0,0 0,6396 -13,6397 -15,1"/>
   </object>
- </objectgroup>
- <objectgroup name="Monedas">
-  <object id="6" x="146" y="443" width="40" height="40"/>
-  <object id="12" x="205" y="84" width="40" height="40"/>
-  <object id="13" x="233" y="442" width="40" height="40"/>
-  <object id="14" x="54" y="442" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="Bloques">
-  <object id="16" x="113" y="221" width="46" height="46"/>
-  <object id="17" x="195" y="276" width="56" height="56"/>
-  <object id="18" x="76" y="333"/>
+  <object id="5" x="33" y="5762" width="40" height="40"/>
+  <object id="7" x="33" y="5762" width="40" height="40"/>
+  <object id="9" x="33" y="5762" width="40" height="40"/>
+  <object id="12" x="74" y="5762" width="40" height="40"/>
+  <object id="13" x="115" y="5762" width="40" height="40"/>
+  <object id="14" x="157" y="5762" width="40" height="40"/>
+  <object id="15" x="200" y="5762" width="40" height="40"/>
+  <object id="16" x="242" y="5761" width="40" height="40"/>
+  <object id="18" x="33" y="5271" width="40" height="40"/>
+  <object id="19" x="73" y="5271" width="40" height="40"/>
+  <object id="20" x="115" y="5272" width="40" height="40"/>
+  <object id="21" x="156" y="5270" width="40" height="40"/>
+  <object id="22" x="198" y="5271" width="40" height="40"/>
+  <object id="23" x="239" y="5274" width="40" height="40"/>
+  <object id="24" x="63" y="5941" width="40" height="40"/>
+  <object id="25" x="213" y="5941" width="40" height="40"/>
+ </objectgroup>
+ <objectgroup name="Monedas">
+  <object id="26" x="68" y="6113" width="40" height="40"/>
+  <object id="27" x="68" y="6113" width="40" height="40"/>
+  <object id="29" x="222" y="6114" width="40" height="40"/>
+  <object id="30" x="146" y="6113" width="40" height="40"/>
+  <object id="31" x="148" y="6271" width="40" height="40"/>
+  <object id="32" x="216" y="5846" width="40" height="40"/>
+  <object id="33" x="198" y="5619" width="40" height="40"/>
+  <object id="34" x="37" y="5517" width="40" height="40"/>
+  <object id="35" x="237" y="5383" width="40" height="40"/>
+ </objectgroup>
+ <objectgroup name="Powerups">
+  <object id="36" x="139" y="6007" width="40" height="40"/>
+  <object id="37" x="139" y="6007" width="40" height="40"/>
+  <object id="39" x="72" y="5843" width="40" height="40"/>
+  <object id="40" x="63" y="5626" width="40" height="40"/>
+  <object id="41" x="187" y="5452" width="40" height="40"/>
+  <object id="42" x="79" y="5185" width="40" height="40"/>
  </objectgroup>
 </map>

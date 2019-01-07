@@ -10,6 +10,8 @@ var res = {
     bloque_plist : "res/bloques.plist",
     boton_jugar_png : "res/boton_jugar.png",
     menu_titulo_png : "res/menu_titulo.png",
+    animacionpanda_plist : "res/animacionpanda.plist",
+    animaciontigre_plist : "res/animaciontigre.plist"
 };
 
 var g_resources = [];

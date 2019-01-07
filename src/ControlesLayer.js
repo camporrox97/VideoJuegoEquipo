@@ -1,6 +1,5 @@
 var ControlesLayer = cc.Layer.extend({
     etiquetaMonedas:null,
-    monedas:0,
     ctor:function () {
         this._super();
         var size = cc.winSize;
@@ -8,10 +7,19 @@ var ControlesLayer = cc.Layer.extend({
 
 
     // Contador Monedas
-        this.etiquetaMonedas = new cc.LabelTTF("Monedas: 0", "Helvetica", 20);
+        this.etiquetaMonedas = new cc.LabelTTF("Monedas: 5", "Helvetica", 20);
         this.etiquetaMonedas.setPosition(cc.p(150, 30));
         this.etiquetaMonedas.fillStyle = new cc.Color(0, 0, 0, 0);
         this.addChild(this.etiquetaMonedas);
+
+        this.etiquetaPower = new cc.LabelTTF("Powerup: nada", "Helvetica", 20);
+                this.etiquetaPower.setPosition(cc.p(150, 70));
+                this.etiquetaPower.fillStyle = new cc.Color(0, 0, 0, 0);
+                this.addChild(this.etiquetaPower);
+         this.etiquetaPuntos = new cc.LabelTTF("0", "Helvetica", 20);
+                this.etiquetaPuntos.setPosition(cc.p(250, 30));
+                this.etiquetaPuntos.fillStyle = new cc.Color(0, 0, 0, 0);
+                this.addChild(this.etiquetaPuntos);
 
         cc.eventManager.addListener({
               event: cc.EventListener.KEYBOARD,
@@ -22,8 +30,6 @@ var ControlesLayer = cc.Layer.extend({
         this.scheduleUpdate();
         return true;
     },
-
-
 
     procesarControles:function () {
             var jugador = this.getParent().getChildByTag(idCapaJuego).jugador;
@@ -71,12 +77,19 @@ var ControlesLayer = cc.Layer.extend({
 
 
     agregarMoneda:function(){
-        this.monedas++;
-        this.etiquetaMonedas.setString("Monedas: " + this.monedas);
+        var jugador = this.getParent().getChildByTag(idCapaJuego).jugador;
+        jugador.cogerMoneda();
     },
 
 
     update:function (dt) {
+    var jugador = this.getParent().getChildByTag(idCapaJuego).jugador;
+        var powerr = (jugador.powerup == 0 ? "nada": (jugador.powerup == 1 ? "estrella" : "doble"));
+        var extra = jugador.powerup > 0 ? (jugador.iteracionesPowerup + "") : ""
         this.procesarControles(this);
+
+        this.etiquetaMonedas.setString("Monedas: " + jugador.monedas);
+        this.etiquetaPower.setString("Power: " + powerr + " " + extra);
+        this.etiquetaPuntos.setString("" + jugador.puntos);
     }
 });
