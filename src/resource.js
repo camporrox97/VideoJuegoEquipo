@@ -11,7 +11,10 @@ var res = {
     boton_jugar_png : "res/boton_jugar.png",
     menu_titulo_png : "res/menu_titulo.png",
     animacionpanda_plist : "res/animacionpanda.plist",
-    animaciontigre_plist : "res/animaciontigre.plist"
+    animaciontigre_plist : "res/animaciontigre.plist",
+    boton_reanudar_png : "res/boton_reanudar.png",
+
+
 };
 
 var g_resources = [];

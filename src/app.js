@@ -81,7 +81,10 @@ var GameLayer = cc.Layer.extend({
         this.formasEliminar.push(shapePowerup);
     },
     gameOver : function() {
-        // HACER GAME OVER
+
+       // this.jugador.body.p = cc.p(150,50);
+       cc.director.pause();
+       this.getParent().addChild(new GameOverLayer());
     },
 
     update: function (dt) {
@@ -171,6 +174,8 @@ var GameLayer = cc.Layer.extend({
 var GameScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
+        cc.director.resume();
+
         var gamelayer = new GameLayer();
         this.addChild(gamelayer,0,idCapaJuego);
 

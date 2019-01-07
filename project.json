@@ -18,6 +18,7 @@
         "src/Moneda.js",
         "src/Bloque.js",
         "src/fondo.js",
-        "src/powerups.js"
+        "src/powerups.js",
+        "src/GameOverLayer.js"
     ]
 }
