@@ -40,7 +40,7 @@ cogerMoneda:function() {
 impactado:function() {
     if (this.powerup != powerup_estrella)
         this.monedas--;
-    this.puntos++;
+    this.puntos += (this.powerup == powerup_doble ? 2 : 1);
 },
 cogerPowerup:function(tipo) {
     this.powerup = tipo;
