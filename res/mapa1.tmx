@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="200" tilewidth="32" tileheight="32" nextobjectid="43">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="200" tilewidth="32" tileheight="32" nextobjectid="48">
  <tileset firstgid="1" name="tiles32" tilewidth="32" tileheight="32" tilecount="98" columns="14">
   <image source="tiles32.png" width="448" height="224"/>
  </tileset>
  <layer name="PatronesFondo" width="10" height="200">
   <data encoding="base64" compression="zlib">
-   eJztwwENAAAMw6C6mn9nF3JIWDVVVVVVVVVVff4A4kKtwA==
+   eJztyqENADAMA0FvFZz9lyqvVFwlOnCywVeSAgAAAAAAYJV+/K0df/W1OqY6aK6uxA==
   </data>
  </layer>
  <layer name="PatronesTerreno" width="10" height="200">
   <data encoding="base64" compression="zlib">
-   eJztyrENAAAIwzDu6/8HsXRnR46UzZm7dI7jOI7jOI7jOI7jOI7jOI7jOI7jOI776hYUcHOh
+   eJztzrEJAEAIBMGvT77/ekzMjUSQOdhsgovXLyqO4ziO4ziO4ziO4ziO4ziO47gp95u2/3Ecx3H3XQKAkXYB
   </data>
  </layer>
  <objectgroup name="Suelos">
@@ -19,6 +19,18 @@
   </object>
   <object id="4" x="23" y="1">
    <polyline points="0,0 0,6396 -13,6397 -15,1"/>
+  </object>
+  <object id="43" x="105" y="5827">
+   <polyline points="0,0 1,220 -9,219 -9,-3"/>
+  </object>
+  <object id="44" x="42" y="5824">
+   <polyline points="0,0 0,223 -10,224 -9,1"/>
+  </object>
+  <object id="45" x="167" y="5314">
+   <polyline points="0,0 2,189 -8,189 -8,-2"/>
+  </object>
+  <object id="46" x="256" y="5502">
+   <polyline points="0,0 7,1 9,-186 0,-186"/>
   </object>
  </objectgroup>
  <objectgroup name="Bloques">
@@ -36,7 +48,7 @@
   <object id="21" x="156" y="5270" width="40" height="40"/>
   <object id="22" x="198" y="5271" width="40" height="40"/>
   <object id="23" x="239" y="5274" width="40" height="40"/>
-  <object id="24" x="63" y="5941" width="40" height="40"/>
+  <object id="24" x="51" y="5924" width="40" height="40"/>
   <object id="25" x="213" y="5941" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="Monedas">
@@ -48,14 +60,19 @@
   <object id="32" x="216" y="5846" width="40" height="40"/>
   <object id="33" x="198" y="5619" width="40" height="40"/>
   <object id="34" x="37" y="5517" width="40" height="40"/>
-  <object id="35" x="237" y="5383" width="40" height="40"/>
+  <object id="35" x="203" y="5355" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="Powerups">
   <object id="36" x="139" y="6007" width="40" height="40"/>
   <object id="37" x="139" y="6007" width="40" height="40"/>
-  <object id="39" x="72" y="5843" width="40" height="40"/>
+  <object id="39" x="51" y="5835" width="40" height="40"/>
   <object id="40" x="63" y="5626" width="40" height="40"/>
-  <object id="41" x="187" y="5452" width="40" height="40"/>
+  <object id="41" x="202" y="5457" width="40" height="40"/>
   <object id="42" x="79" y="5185" width="40" height="40"/>
+ </objectgroup>
+ <objectgroup name="Meta">
+  <object id="47" x="28" y="5055">
+   <polyline points="0,0 1,9 260,11 261,-1 1,-1"/>
+  </object>
  </objectgroup>
 </map>

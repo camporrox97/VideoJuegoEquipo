@@ -9,24 +9,26 @@ var Jugador = cc.Class.extend({
     monedas:5,
     puntos : 0,
     powerup : powerup_nada,
-    iteracionesPowerup : 100,
+    iteracionesPowerup : 200,
     body:null,
 ctor:function (gameLayer, posicion) {
     this.gameLayer = gameLayer;
 
-    this.sprite = new cc.PhysicsSprite("#jugador_avanzando1.png");
+    this.sprite = new cc.PhysicsSprite("#animacion_bola1.png");
 
-    this.body = new cp.Body(5, 0.01);
+    this.body = new cp.Body(5, cp.momentForBox(1,20,20));
     this.body.setPos(posicion);
     //body.w_limit = 0.02;
+    this.body.setAngle(0);
 
     this.sprite.setBody(this.body);
 
     gameLayer.space.addBody(this.body);
-
+    console.log(this.sprite.getContentSize().width);
+    console.log(this.sprite.getContentSize().height);
     this.shape = new cp.BoxShape(this.body,
-        this.sprite.getContentSize().width,
-        this.sprite.getContentSize().height);
+        20,
+        20);
     this.shape.setCollisionType(tipoJugador);
 
     gameLayer.space.addShape(this.shape);
@@ -44,14 +46,14 @@ impactado:function() {
 },
 cogerPowerup:function(tipo) {
     this.powerup = tipo;
-    this.iteracionesPowerup = 100;
+    this.iteracionesPowerup = 200;
 },
 update:function() {
     if (this.powerup != 0){
         this.iteracionesPowerup--;
         if(this.iteracionesPowerup <= 0) {
             this.powerup = powerup_nada;
-            this.iteracionesPowerup = 100;
+            this.iteracionesPowerup = 200;
         }
     }
 }

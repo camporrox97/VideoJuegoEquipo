@@ -7,7 +7,7 @@ var Bloque = cc.Class.extend({
 ctor:function (gameLayer, posicion) {
     this.gameLayer = gameLayer;
 
-    this.lifes = Math.floor(Math.random() * 10);
+    this.lifes = Math.floor(Math.random() * 9) + 1;
     this.etiquetaLifes = new cc.LabelTTF(("" + this.lifes), "Helvetica", 20);
     this.etiquetaLifes.setPosition(cc.p(20,20));
     this.etiquetaLifes.fillStyle = new cc.Color(0, 255, 0, 0);

@@ -8,6 +8,8 @@ var tipoJugador = 2;
 var tipoMoneda = 3;
 var tipoBloque = 4;
 var tipoPowerup = 5;
+var tipoMeta = 6;
+var mapa = res.mapa1_tmx;
 
 var GameLayer = cc.Layer.extend({
     sprite: null,
@@ -29,7 +31,7 @@ var GameLayer = cc.Layer.extend({
 
 
         // CACHE
-        cc.spriteFrameCache.addSpriteFrames(res.jugador_avanzando_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.serpiente_plist);
         cc.spriteFrameCache.addSpriteFrames(res.moneda_plist);
         cc.spriteFrameCache.addSpriteFrames(res.bloque_plist);
         cc.spriteFrameCache.addSpriteFrames(res.animacionpanda_plist);
@@ -45,6 +47,7 @@ var GameLayer = cc.Layer.extend({
         this.space.addCollisionHandler(tipoJugador, tipoMoneda, null, this.collisionJugadorConMoneda.bind(this), null, null);
         this.space.addCollisionHandler(tipoJugador, tipoBloque, null, this.collisionJugadorConBloque.bind(this), null, null);
         this.space.addCollisionHandler(tipoJugador, tipoPowerup, null, this.collisionJugadorConPowerup.bind(this), null, null);
+        this.space.addCollisionHandler(tipoJugador, tipoMeta, null, this.collisionJugadorConMeta.bind(this), null, null);
         return true;
 
 
@@ -53,8 +56,8 @@ var GameLayer = cc.Layer.extend({
 
     },
     collisionSueloConJugador:function (arbiter, space) {
-        this.jugador.body.vx = 0;
-        this.jugador.body.applyImpulse(cp.v(50,0), cp.v(0, 0));
+        //this.jugador.body.vx = 0;
+        //this.jugador.body.applyImpulse(cp.v(50,0), cp.v(0, 0));
     },
     collisionJugadorConMoneda:function (arbiter, space) {
         var shapes = arbiter.getShapes();
@@ -80,6 +83,17 @@ var GameLayer = cc.Layer.extend({
         powerup.doThing(this.jugador);
         this.formasEliminar.push(shapePowerup);
     },
+    collisionJugadorConMeta:function (arbiter, space) {
+        if (mapa == res.mapa1_tmx) {
+            mapa = res.mapa2_tmx;
+            cc.director.runScene(new GameScene());
+        } else {
+            mapa = res.mapa1_tmx;
+            this.gameOver();
+        }
+
+    },
+
     gameOver : function() {
 
        // this.jugador.body.p = cc.p(150,50);
@@ -123,7 +137,7 @@ var GameLayer = cc.Layer.extend({
     }
     ,
     cargarMapa: function () {
-        this.mapa = new cc.TMXTiledMap(res.mapa1_tmx);
+        this.mapa = new cc.TMXTiledMap(mapa);
         // Añadirlo a la Layer
         this.addChild(this.mapa);
         // Ancho del mapa
@@ -142,6 +156,17 @@ var GameLayer = cc.Layer.extend({
                 shapeSuelo.setCollisionType(tipoSuelo);
                 this.space.addStaticShape(shapeSuelo);
             } }
+
+
+        var grupoMeta = this.mapa.getObjectGroup("Meta");
+                var meta = grupoMeta.getObjects()[0];
+                var puntosMeta = meta.polylinePoints;
+                var bodyMeta = new cp.StaticBody();
+                var shapeMeta =  new cp.SegmentShape(bodyMeta, cp.v(parseInt(meta.x) + parseInt(puntosMeta[j].x), parseInt(meta.y) - parseInt(puntosMeta[j].y)), cp.v(parseInt(meta.x) + parseInt(puntosMeta[j + 1].x), parseInt(meta.y) - parseInt(puntosMeta[j + 1].y)), 10);
+                shapeMeta.setCollisionType(tipoMeta);
+                this.space.addStaticShape(shapeMeta);
+
+
         var grupoMonedas = this.mapa.getObjectGroup("Monedas");
         var monedasArray = grupoMonedas.getObjects();
         for (var i = 0; i < monedasArray.length; i++) {
