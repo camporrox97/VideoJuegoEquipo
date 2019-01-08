@@ -98,6 +98,7 @@ var GameLayer = cc.Layer.extend({
 
        // this.jugador.body.p = cc.p(150,50);
        cc.director.pause();
+       cc.audioEngine.stopMusic();
        this.getParent().addChild(new GameOverLayer());
     },
 
@@ -124,6 +125,7 @@ var GameLayer = cc.Layer.extend({
                     if (this.bloques[i].shape == shape) {
                         this.bloques[i].eliminar();
                         this.bloques.splice(i, 1);
+                        cc.audioEngine.playEffect(res.grunt_wav);
                         }
                    }
                 for (var i = 0; i < this.powerups.length; i++) {
@@ -200,6 +202,7 @@ var GameScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
         cc.director.resume();
+        cc.audioEngine.playMusic(res.sonidobucle_wav, true)
 
         var gamelayer = new GameLayer();
         this.addChild(gamelayer,0,idCapaJuego);
